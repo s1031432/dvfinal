@@ -133,7 +133,8 @@ function redrawBar(stocknumber, stockname, startDate, endDate, money, mode, long
 
 
     // stocknumber, stockname, startDate, endDate, money
-    d3.csv("http://127.0.0.1:5000/"+stocknumber+"/"+startDate+"/"+endDate+"/"+money, function(error, data) {
+    // d3.csv("http://127.0.0.1:5000/"+stocknumber+"/"+startDate+"/"+endDate+"/"+money, function(error, data) {
+    d3.csv("http://140.119.164.132:5555/"+stocknumber+"/"+startDate+"/"+endDate+"/"+money, function(error, data) {
 
         console.log("dataAAA", mode, longshort, money, data);
         var accessor = candlestick.accessor(),

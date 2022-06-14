@@ -302,7 +302,8 @@ function redrawCandle(stocknumber, stockname) {
 
         d3.select("button").on("click", reset);
 
-        d3.csv("http://127.0.0.1:5000/" + stocknumber, function (error, data) {
+        // d3.csv("http://127.0.0.1:5000/" + stocknumber, function (error, data) {
+        d3.csv("http://140.119.164.132:5555/" + stocknumber, function (error, data) {
                 var accessor = candlestick.accessor(),
                         indicatorPreRoll = 33;  // Don't show where indicators don't have data
                 console.log(data)
