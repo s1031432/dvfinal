@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="candle.css">
+        <link rel="stylesheet" type="text/css" href="antd.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="http://techanjs.org/techan.min.js"></script>
+        <script src="./index.js"></script>
+    </head>
+    <body>
+        <div style="width:80%; margin:0 auto; display: flex; justify-content: space-between">
+            <div id="candle">
+                <script src="./candle.js"></script>
+                <script> redrawCandle("0050.tw", "元大寶來台灣卓越50證券投資信託基金") </script>
+            </div>
+            <div class="ant-list ant-list-sm ant-list-split ant-list-bordered ant-list-something-after-last-item" style="width:30%; float:right; margin:30px;">
+                <div class="ant-list-header">
+                    <div class="ant-segmented-group">
+                        <label class="ant-segmented-item">
+                            <input class="ant-segmented-item-input" type="radio" checked="checked">
+                            <div class="ant-segmented-item-label ant-segmented-item-selected" title="twstock">台北股市</div>
+                        </label>
+                        <label class="ant-segmented-item">
+                            <input class="ant-segmented-item-input" type="radio">
+                            <div class="ant-segmented-item-label" title="usstock">美國股市</div>
+                        </label>
+                        <label class="ant-segmented-item">
+                            <input class="ant-segmented-item-input" type="radio">
+                            <div class="ant-segmented-item-label" title="crypto">加密貨幣</div>
+                        </label>
+                    </div>
+                </div>
+                <div id="twstock" class="ant-spin-nested-loading">
+                    <div class="ant-spin-container">
+                        <ul class="ant-list-items">
+                            <li class="ant-list-item">0050.TW 元大寶來台灣卓越50證券投資信託基金</li>
+                            <li class="ant-list-item">00632R.TW 元大台灣50反1</li>
+                            <li class="ant-list-item">2330.TW 台積電</li>
+                            <li class="ant-list-item">2603.TW 長榮</li>
+                            <li class="ant-list-item">2618.TW 長榮航</li>
+                            <li class="ant-list-item">2891.TW 中信金</li>
+                            <li class="ant-list-item">3481.TW 群創</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="usstock" class="ant-spin-nested-loading" style="display: none;">
+                    <div class="ant-spin-container">
+                        <ul class="ant-list-items">
+                            <li class="ant-list-item">^GSPC S&P 500</li>
+                            <li class="ant-list-item">^DJI Dow Jones Industrial Average</li>
+                            <li class="ant-list-item">^IXIC NASDAQ Composite</li>
+                            <li class="ant-list-item">^RUT Russell 2000</li>
+                            <li class="ant-list-item">CL=F Crude Oil</li>
+                            <li class="ant-list-item">GC=F Gold</li>
+                            <li class="ant-list-item">SI=F Silver</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="crypto" class="ant-spin-nested-loading" style="display: none;">
+                    <div class="ant-spin-container">
+                        <ul class="ant-list-items">
+                            <li class="ant-list-item">BTC-USD Bitcoin USD</li>
+                            <li class="ant-list-item">ETH-USD Ethereum USD</li>
+                            <li class="ant-list-item">BETH-USD Beacon ETH USD</li>
+                            <li class="ant-list-item">BNB-USD Binance Coin USD</li>
+                            <li class="ant-list-item">XMR-USD Monero USD</li>
+                            <li class="ant-list-item">LUNA1-USD Terra USD</li>
+                            <li class="ant-list-item">TONCOIN-USD Toncoin USD</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="info" style="width:80%; margin:1% auto; display: flex; justify-content: space-around">
+            <table class="ant-table">
+                <thead class="ant-table-thead">
+                    <tr>
+                        <th class="ant-table-cell">標的代碼</th>
+                        <th class="ant-table-cell">投資金額</th>
+                        <th class="ant-table-cell">投資起始日</th>
+                        <th class="ant-table-cell">投資終止日</th>
+                        <th class="ant-table-cell">方向</th>
+                        <th class="ant-table-cell">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="invest">
+                    <tr id="tool">
+                        <td class="ant-table-cell"><input id="no" placeholder="0050.TW" class="ant-input" type="text"></td>
+                        <td class="ant-table-cell"><input id="money" placeholder="600000" class="ant-input" type="text"></td>
+                        <td class="ant-table-cell"><input id="startDate" placeholder="2021-01-01" class="ant-input" type="text"></td>
+                        <td class="ant-table-cell"><input id="endDate" placeholder="2022-12-31" class="ant-input" type="text"></td>
+                        <td class="ant-table-cell"> </td>
+                        <td class="ant-table-cell" style="text-align:center;"><span class="ant-tag ant-tag-green" onclick="add('long')">多</span><span class="ant-tag ant-tag-volcano" onclick="add('short')">空</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="width:80%; margin:0 auto; display: flex; justify-content: space-between; background-color:#f7f7f7;">
+            <div id="bar">
+                <script src="./bar.js"></script>
+            </div>
+            <div id="pie1" style="display: flex; flex-direction: column;">
+                <svg id="addPieChart" width="240" height="240"></svg>
+                <div id="addText"></div>
+            </div>
+            <div id="pie2" style="display: flex; flex-direction: column;">
+                <svg id="subPieChart" width="240" height="240"></svg>
+                <div id="subText"></div>
+            </div>
+            <script src="./pie.js"></script>
+
+        </div>
+        
+    </body>
+</html>
+<script src="./listclick.js"></script>
